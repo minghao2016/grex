@@ -89,12 +89,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">1</span> Introduction</h1>
 <p>The Genotype-Tissue Expression (GTEx) project <span class="citation">(Lonsdale et al. 2013)</span> aims at measuring human tissue-specific gene expression levels. With the collected data, we will be able to explore the landscape of gene expression, gene regulation, and their deep connections with genetic variations.</p>
 <p>Raw GTEx data contains expression measurements from various types of elements (such as genes, pseudogenes, noncoding DNA sequences) covering the whole genome. For some analysis, it might be desirable to only keep a subset of the data, for example, data from protein coding genes. In such cases, mapping the original Ensembl gene IDs to Entrez gene IDs or HGNC symbols become an essential step in the analysis pipeline.</p>
-<p>The <code>grex</code> package offers a minimal dependency solution to do such ID mappings. Currently, an Ensembl ID from GTEx can be mapped to its Entrez Gene ID, HGNC gene symbol, HGNC gene name, cytogenetic location, and UniProt ID. We also limit our scope on the Ensembl IDs appeared in the gene read count data. Ensembl IDs from transcript data will be considered in future versions.</p>
+<p>The <code>grex</code> package offers a minimal dependency solution to do such ID mappings. Currently, an Ensembl ID from GTEx can be mapped to its Entrez gene ID, HGNC gene symbol, HGNC gene name, cytogenetic location, and UniProt ID. We also limit our scope on the Ensembl IDs appeared in the gene read count data. Ensembl IDs from transcript data will be considered in future versions.</p>
 </div>
 <div id="mapping-table" class="section level1">
 <h1><span class="header-section-number">2</span> Mapping Table</h1>
 <p>To facilitate such ID conversion tasks, the <code>grex</code> package has a built-in mapping table derived from the well-known annotation data package <code>org.Hs.eg.db</code> <span class="citation">(Carlson 2015)</span>. The mapping data we used has integrated mapping information from Ensembl and NCBI, to maximize the possibility of finding a matched Entrez ID. The R code for creating the table is located <a href="https://github.com/road2stat/grex/blob/master/data-raw/data-generator.R">here</a>.</p>
-<p>Not surprisingly, when creating such a table, there were hundreds of cases where a single Ensembl ID can be mapped to multiple Entrez Gene IDs. To create a one-to-one mapping, we took a simple approach: we just removed the duplicated Entrez IDs and only kept the first we encountered in the original database. Therefore, there might be cases where the mapping is not 100% accurate. If you have such doubts for particular results, please try searching the original ID on the Ensembl website and see if we got a correct mapped ID.</p>
+<p>Not surprisingly, when creating such a table, there were hundreds of cases where a single Ensembl ID can be mapped to multiple Entrez gene IDs. To create a one-to-one mapping, we took a simple approach: we just removed the duplicated Entrez IDs and only kept the first we encountered in the original database. Therefore, there might be cases where the mapping is not 100% accurate. If you have such doubts for particular results, please try searching the original ID on the Ensembl website and see if we got a correct mapped ID.</p>
 </div>
 <div id="code-example" class="section level1">
 <h1><span class="header-section-number">3</span> Code Example</h1>
@@ -129,7 +129,7 @@ df =<span class="st"> </span><span class="kw">grex</span>(id)
 ## 5  ENSG00000242485     55052
 ## 8  ENSG00000235098    441869
 ## 10 ENSG00000205116    643965</code></pre>
-<p>If you want to start from raw gene IDs provided by GTEx (e.g. <code>ENSG00000227232.4</code>), the function <code>cleanid()</code> can help you remove the <code>.version</code> part in them.</p>
+<p>If you want to start from the raw GENCODE gene IDs provided by GTEx (e.g. <code>ENSG00000227232.4</code>), the function <code>cleanid()</code> can help you remove the <code>.version</code> part in them, to produce Ensembl IDs.</p>
 </div>
 <div id="whats-next" class="section level1">
 <h1><span class="header-section-number">4</span> What’s Next?</h1>
